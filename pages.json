@@ -1,0 +1,143 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/tabBar/home/home",
+			"style": {
+				"navigationBarTextStyle":"black",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance":50,
+				"app-plus": {
+					"titleNView": false ,//禁用原生导航栏
+					"softinputNavBar":"none",
+					"subNVues":[{  
+						"id": "homeTitleNvue", // 唯一标识  
+						"path": "pages/tabBar/home/subNvue/homeTitleNvue", // 页面路径  
+						"type":"navigationBar"
+					}]
+				}
+			}
+		},
+		{
+			"path": "pages/tabBar/category/category",
+			"style": {
+				"navigationBarTextStyle":"black",
+				"app-plus": {
+					"titleNView": false ,//禁用原生导航栏
+					"bounce":"none"
+					
+				}
+			}
+		},
+	
+        {
+        	"path": "pages/tabBar/about/about",
+        	"style": {
+        		"enablePullDownRefresh": true,
+        		"navigationBarTextStyle":"black",
+        		"app-plus": {
+        			"titleNView": false ,//禁用原生导航栏
+        			"bounce":"none"
+        		}
+        	}
+        },
+        {
+        	"path": "pages/tabBar/active/active",
+        	"style": {
+        		"enablePullDownRefresh": true,
+        		"navigationBarTextStyle":"black",
+        		"app-plus": {
+        			"titleNView": false ,//禁用原生导航栏
+        			"bounce":"none"
+        		}
+        	}
+        },
+        {
+        	"path": "pages/active/active",
+        	"style": {
+        		"enablePullDownRefresh": true,
+        		"navigationBarTextStyle":"black",
+        		"app-plus": {
+        			"titleNView": false ,//禁用原生导航栏
+        			"bounce":"none"
+        		}
+        	}
+        },
+		{
+			"path": "pages/tabBar/user/user",
+			"style": {
+				"enablePullDownRefresh": true,
+				"backgroundTextStyle":"light",
+				"navigationBarBackgroundColor":"#f06c7a",
+				"backgroundColorTop":"#f06c7a",
+				"navigationBarTextStyle":"white",
+				"app-plus": {
+					"titleNView": false ,//禁用原生导航栏
+					"subNVues":[{  
+						"id": "userTitleNvue", // 唯一标识  
+						"path": "pages/tabBar/user/subNvue/userTitleNvue", // 页面路径  
+						"type":"navigationBar"
+					}]
+				}
+			}
+		},
+		{
+            "path" : "pages/goods/goods-list/goods-list",
+            "style" : {
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"bounce":"none"
+				}
+			}
+        }
+   
+     
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText" : "",
+		"navigationBarBackgroundColor" : "#ffffff",
+		"backgroundColor" : "#ffffff",
+		"backgroundColorTop":"#ffffff",
+		"backgroundColorBottom":"#ffffff"
+	},
+	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#f06c7a",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+            {
+				"pagePath": "pages/tabBar/home/home",
+				"iconPath": "static/img/tabBar/icon/tubiao-_1.png",
+				"selectedIconPath": "static/img/tabBar/icon/tubiao-_1.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/tabBar/category/category",
+				"iconPath": "static/img/tabBar/icon/tubiao-_6.png",
+				"selectedIconPath": "static/img/tabBar/icon/tubiao-_6.png",
+				"text": "店铺"
+			},
+            {
+            	"pagePath": "pages/active/active",
+            	"iconPath": "static/img/tabBar/icon/tubiao-_13.png",
+            	"selectedIconPath": "static/img/tabBar/icon/tubiao-_13.png",
+            	"text": "活动"
+            },
+		
+			{
+				"pagePath": "pages/tabBar/user/user",
+				"iconPath": "static/img/tabBar/user.png",
+				"selectedIconPath": "static/img/tabBar/user-on.png",
+				"text": "我的"
+			},
+            {
+            	"pagePath": "pages/tabBar/about/about",
+            	"iconPath": "static/img/tabBar/icon/tubiao-_11.png",
+            	"selectedIconPath": "static/img/tabBar/icon/tubiao-_11.png",
+            	"text": "关于我们"
+            }
+		]
+	}
+}
