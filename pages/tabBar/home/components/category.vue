@@ -15,22 +15,22 @@
 			return {
 				list: [{
 						id: 1,
-						name: '汉服',
+						name: '襦裙',
 						img: '/static/img/noorder.png'
 					},
 					{
 						id: 2,
-						name: '唐服',
+						name: '马面',
 						img: '/static/img/noorder.png'
 					},
 					{
 						id: 3,
-						name: '裤子',
+						name: '道袍',
 						img: '/static/img/noorder.png'
 					},
 					{
 						id: 4,
-						name: '伞',
+						name: '鞋子',
 						img: '/static/img/noorder.png'
 					},
 
