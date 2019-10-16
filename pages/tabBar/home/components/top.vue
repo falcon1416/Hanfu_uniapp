@@ -15,7 +15,7 @@
 
 <script>
 	import {
-		queryTop
+		QueryTop
 	} from "@/api/shop.js"
 	export default {
 		data() {
@@ -32,7 +32,7 @@
 			//读取数据
 			loadData() {
 				//读取数据
-				queryTop((info) => {
+				QueryTop((info) => {
 					this.list = info.list
 				})
 			},

@@ -22,7 +22,7 @@
 		<hCategory></hCategory>
 
 		<!-- 商品列表 -->
-		<hShop></hShop>
+		<hShop ref="shop"></hShop>
 		
 	</view>
 </template>
@@ -63,26 +63,7 @@
 		},
 		//上拉加载，需要自己在page.json文件中配置"onReachBottomDistance"
 		onReachBottom() {
-			uni.showToast({
-				title: '触发上拉加载'
-			});
-			let len = this.productList.length;
-			if (len >= 40) {
-				this.loadingText = '到底了';
-				return false;
-			}
-			// 演示,随机加入商品,生成环境请替换为ajax请求
-			let end_goods_id = this.productList[len - 1].goods_id;
-			for (let i = 1; i <= 10; i++) {
-				let goods_id = end_goods_id + i;
-				let p = {
-					goods_id: 0,
-					img: 'http://n.sinaimg.cn/sinacn20111/580/w690h690/20181220/e2db-hqnkypr5523732.jpg',
-					name: '汉服专卖店',
-
-				};
-				this.productList.push(p);
-			}
+			this.$refs.shop.loadNextData();
 		},
 		onLoad() {
 
