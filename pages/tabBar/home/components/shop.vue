@@ -44,6 +44,11 @@
 			loadNextData(){
 				this.info.page++
 				this.loadData()
+			},
+			toShop(item){
+				uni.navigateTo({
+					url:"/pages/shop/index?id="+item.id
+				})
 			}
 		}
 	}

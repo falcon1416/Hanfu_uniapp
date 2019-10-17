@@ -81,7 +81,17 @@
 			}
 		},
 		{
-            "path" : "pages/goods/goods-list/goods-list",
+		    "path" : "pages/shop/index",
+		    "style" : {
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"bounce":"none"
+				}
+			}
+		},
+		{
+            "path" : "pages/shop/list",
             "style" : {
 				"navigationBarTitleText" : "",
 				"enablePullDownRefresh": true,

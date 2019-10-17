@@ -9,62 +9,16 @@
 		<!-- 占位 -->
 		<view  class="place"></view>
 		<!-- 商品列表 -->
-		<view class="goods-list">
-			<view class="product-list">
-				<view class="product" v-for="(goods) in goodsList" :key="goods.goods_id" @tap="toGoods(goods)">
-					<image mode="widthFix" :src="goods.img"></image>
-					<view class="name">{{goods.name}}</view>
-					
-				</view>
-			</view>
-			<view class="loading-text">{{loadingText}}</view>
-		</view>
+		<hShop ref="shop"></hShop>
 	</view>
 </template>
 
 <script>
+	import hShop from '../tabBar/home/components/shop.vue'
 	export default {
 		data() {
 			return {
-				goodsList:[
-					{
-						goods_id: 0,
-						img: 'http://n.sinaimg.cn/sinacn20111/580/w690h690/20181220/e2db-hqnkypr5523732.jpg',
-						name: '汉服专卖店',
-						
-					},
-					{
-						goods_id: 0,
-						img: 'http://n.sinaimg.cn/sinacn20111/580/w690h690/20181220/e2db-hqnkypr5523732.jpg',
-						name: '汉服专卖店',
-						
-					},
-					{
-						goods_id: 0,
-						img: 'http://n.sinaimg.cn/sinacn20111/580/w690h690/20181220/e2db-hqnkypr5523732.jpg',
-						name: '汉服专卖店',
-						
-					},
-					{
-						goods_id: 0,
-						img: 'http://n.sinaimg.cn/sinacn20111/580/w690h690/20181220/e2db-hqnkypr5523732.jpg',
-						name: '汉服专卖店',
-						
-					},
-					{
-						goods_id: 0,
-						img: 'http://n.sinaimg.cn/sinacn20111/580/w690h690/20181220/e2db-hqnkypr5523732.jpg',
-						name: '汉服专卖店',
-						
-					},
-					{
-						goods_id: 0,
-						img: 'http://n.sinaimg.cn/sinacn20111/580/w690h690/20181220/e2db-hqnkypr5523732.jpg',
-						name: '汉服专卖店',
-						
-					},
-				],
-				loadingText:"正在加载...",
+				
 				headerTop:"0px",
 				headerPosition:"fixed",
 				orderbyList:[
@@ -75,8 +29,11 @@
 				orderby:"sheng"
 			};
 		},
+		components: {
+			hShop,
+		},
 		onLoad: function (option) { //option为object类型，会序列化上个页面传递的参数
-			console.log(option.cid); //打印出上个页面传递的参数。
+			console.log(option.type_id); //打印出上个页面传递的参数。
 			uni.setNavigationBarTitle({
 				title: option.name
 			});

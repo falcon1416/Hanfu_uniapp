@@ -36,6 +36,13 @@
 
 				],
 			}
+		},
+		methods: {
+			toCategory(item){
+				uni.navigateTo({
+					url:"/pages/shop/list?type_id="+item.id+"&name="+item.name
+				})
+			}
 		}
 	}
 </script>

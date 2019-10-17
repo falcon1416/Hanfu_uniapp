@@ -86,23 +86,23 @@
 				//uni.showToast({ title: '建议跳转到新页面做搜索功能' });
 			},
 			//分类跳转
-			toCategory(e) {
-				//uni.showToast({title: e.name,icon:"none"});
-				uni.setStorageSync('catName', e.name);
-				uni.navigateTo({
-					url: '../../goods/goods-list/goods-list?cid=' + e.id + '&name=' + e.name
-				});
-			},
+	// 		toCategory(e) {
+	// 			//uni.showToast({title: e.name,icon:"none"});
+	// 			uni.setStorageSync('catName', e.name);
+	// 			uni.navigateTo({
+	// 				url: '../../goods/goods-list/goods-list?cid=' + e.id + '&name=' + e.name
+	// 			});
+	// 		},
 	
 			//商品跳转
-			toGoods(e) {
-				console.log(111111);
-				window.Location.href = "http://www.baidu.com";
-				// uni.navigateTo({
-				// 	url: 'http://www.baidu.com'
-				// });
+			// toGoods(e) {
+			// 	console.log(111111);
+			// 	window.Location.href = "http://www.baidu.com";
+			// 	// uni.navigateTo({
+			// 	// 	url: 'http://www.baidu.com'
+			// 	// });
 
-			}
+			// }
 		}
 	};
 </script>
