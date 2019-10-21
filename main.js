@@ -5,6 +5,10 @@ Vue.config.productionTip = false
 
 App.mpType = 'app'
 
+import cuCustom from './libs/colorui/components/cu-custom.vue'
+Vue.component('cu-custom',cuCustom)
+
+
 const app = new Vue({
     ...App
 })

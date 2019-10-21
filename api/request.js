@@ -1,63 +1,93 @@
-import config from '../config.js'
+const ENV = require('../config/env')
 
-const HOST_URL = config.URL;
-
-function post(url, data, success, fail) {
-	let token = uni.getStorageSync("X-TOKEN")
-
-	uni.request({
-		url: HOST_URL + url,
-		method: 'POST',
-		data: data, //参数为键值对字符串
-		header: {
-			'content-type': 'application/json', // 默认值
-			"token": token ? token : ''
-		},
-		success: function(res) {
-			if (res.statusCode != 200) {
-				if (fail) {
-					fail(err)
-				} else {
-					uni.showToast({
-						icon: 'none',
-						title: "网络错误"
-					});
-				}
-				return;
-			}
-
-			let data = res.data;
-			console.log(data)
-			if (data.code != 200) {
-				if (fail) {
-					fail(data.err)
-				} else {
-					uni.showToast({
-						icon: 'none',
-						title: data.err
-					});
-				}
-				return;
-			}
+/*
+ * url--访问的地址，全路径从http开始
+ * body--json格式的请求数据
+ * method--请求方式，默认post
+ */
+const request = (url, body, method = 'POST') => {
+  return new Promise((resolve, reject) => {
+    //数据加密
+    let postData = body;
 
 
-			if (success) success(data.info)
+    uni.request({
+      url: url,
+      method: method,
+      data: body,
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success(res) {
+        //接口调用成功的回调函数
+        if (res.statusCode != 200) {
+          reject({
+            "result": res.statusCode,
+            "error": res.errMsg
+          })
+          return
+        }
 
-		},
-		fail: function(err) {
-			if (fail) {
-				fail(err)
-			} else {
-				uni.showToast({
-					icon: 'none',
-					title: "网络错误"
-				});
-			}
-		}
-	})
+        
+        let  resdata = {};
+
+        try {
+          resdata = res.data
+         
+          console.log("request data <= ：", url,body, resdata)
+
+        } catch (error) {
+          console.log(error)
+
+          reject(error.message)
+          return
+        }
+ 
+        const result = resdata;
+        if (result.code != 200) {
+          //发生错误
+          reject(resdata.error)
+          return
+        }
+
+        const data = result.info
+        resolve(data)
+      },
+      fail(error) {
+        //接口调用失败的回调函数
+        console.log(error)
+        reject({
+          "result": -1,
+          "error": error.message
+        })
+      }
+    })
+  });
 }
 
+/**
+ * 小程序的promise没有finally方法，自己扩展下
+ */
+Promise.prototype.finally = function(callback) {
+  var Promise = this.constructor;
+  return this.then(
+    function(value) {
+      Promise.resolve(callback()).then(
+        function() {
+          return value;
+        }
+      );
+    },
+    function(reason) {
+      Promise.resolve(callback()).then(
+        function() {
+          throw reason;
+        }
+      );
+    }
+  );
+}
 
-export default {
-	post
+module.exports = {
+  request,
 }
