@@ -41,6 +41,7 @@
 		},
 		created() {
 			const uid = uni.getStorageSync('uid')
+			console.log("uid:",uid)
 			if (uid && uid > 0) {
 				this.isLogin = true;
 				this.loadData();

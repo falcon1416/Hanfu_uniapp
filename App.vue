@@ -15,8 +15,8 @@
 					// #endif
 					// #ifdef MP-WEIXIN || MP-QQ
 					Vue.prototype.StatusBar = e.statusBarHeight;
-					let capsule = wx.getMenuButtonBoundingClientRect();
-					if (capsule) {
+					let capsule = uni.getMenuButtonBoundingClientRect();
+					if (capsule && capsule.left) {
 						Vue.prototype.Custom = capsule;
 						// Vue.prototype.capsuleSafe = uni.upx2px(750) - capsule.left + uni.upx2px(750) - capsule.right;
 						Vue.prototype.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;

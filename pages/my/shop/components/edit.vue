@@ -27,11 +27,6 @@
 		</view>
 	
 		<view class="cu-form-group align-start margin-top">
-			<view class="title">淘宝地址</view>
-			<textarea v-model="info.url" maxlength="-1" placeholder="请输入淘宝地址"></textarea>
-		</view>
-	
-		<view class="cu-form-group align-start margin-top">
 			<view class="title">复制码</view>
 			<textarea v-model="info.share" maxlength="-1" placeholder="淘宝分享的复制码"></textarea>
 		</view>
@@ -59,7 +54,6 @@
 					logo: '',
 					name:'',
 					tag:'',
-					url:'',
 					type:[],
 					share:'',
 					intro:'',
@@ -109,7 +103,6 @@
 					logo: info.logo,
 					name:info.name,
 					tag:info.tag,
-					url:info.url,
 					type:types,
 					share:info.share,
 					intro:info.intro
