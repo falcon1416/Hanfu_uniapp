@@ -9,7 +9,7 @@
 			暂无数据
 		</view>
 		<view v-else class="cu-list menu-avatar">
-			<view v-for="(item,index) in info.list" :key="index"  class="cu-item">
+			<view @click="handleClick(item)" v-for="(item,index) in info.list" :key="index"  class="cu-item">
 				<view class="cu-avatar round lg" :style="'background-image:url('+item.logo+');'"></view>
 				<view class="content">
 					<view class="text-grey">{{item.name}}</view>
@@ -31,7 +31,9 @@
 
 <script>
 	import { My } from "@/api/shop/index.js"
-	
+	import {
+		EventBus
+	} from "@/common/bus.js";
 	export default {
 		data() {
 			return {
@@ -43,17 +45,30 @@
 			};
 		},
 		created() {
+			EventBus.$on("reloadData-myShop-list", () => {
+				this.info.page=1;
+				this.info.list=[];
+				this.loadData();
+			});
+			
 			this.loadData();
 		},
 		methods: {
 			loadData(){
 				My(this.info.page,this.info.limit,info=>{
-					this.info.list=info.list
+					this.info.list=this.info.list.concat(info.list)
 				})
+			},
+			handleClick(item){
+				if(item.status==0){
+					uni.navigateTo({
+						url: "/pages/my/shop/editShop?id="+item.id
+					})
+				}
 			},
 			toAdd() {
 				uni.navigateTo({
-					url: "/pages/my/addShop"
+					url: "/pages/my/shop/addShop"
 				})
 			}
 		}

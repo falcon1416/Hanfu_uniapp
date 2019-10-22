@@ -70,7 +70,7 @@
 			},
 			toShop() {
 				uni.navigateTo({
-					url:"/pages/my/shop"
+					url:"/pages/my/shop/index"
 				})
 			},
 		}

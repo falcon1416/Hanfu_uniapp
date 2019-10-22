@@ -10,6 +10,8 @@ module.exports = {
 	},
 	shop:{
 		add:'/shop/add',
-		my:'/shop/query-my'
+		edit:'/shop/edit',
+		my:'/shop/query-my',
+		detail:'/shop/detail',
 	}
 }
