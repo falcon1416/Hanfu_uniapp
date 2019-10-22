@@ -4,5 +4,12 @@ module.exports = {
 	},
 	user:{
 		register:'/user/register'
+	},
+	file:{
+		upload:'/file/upload'
+	},
+	shop:{
+		add:'/shop/add',
+		my:'/shop/query-my'
 	}
 }

@@ -11,12 +11,8 @@ exports.Register = (openid, name, avatar, sex, success, fail) => {
 		avatar,
 		sex
 	}).then(function(info) {
-		console.log(info)
-
 		if (success) {
-			success({
-				token: info.token
-			})
+			success(info)
 		}
 	}).catch(function(error) {
 		console.log(error)

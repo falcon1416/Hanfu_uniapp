@@ -10,7 +10,6 @@ const request = (url, body, method = 'POST') => {
     //数据加密
     let postData = body;
 
-
     uni.request({
       url: url,
       method: method,
