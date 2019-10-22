@@ -3,7 +3,8 @@ module.exports = {
 		code2Session:'/qq/code2Session'
 	},
 	user:{
-		register:'/user/register'
+		register:'/user/register',
+		myinfo:'/user/my-info',
 	},
 	file:{
 		upload:'/file/upload'

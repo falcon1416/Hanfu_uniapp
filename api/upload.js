@@ -9,7 +9,7 @@ const upload = (file) => {
 	return new Promise((resolve, reject) => {
 		let arr = file.split("/")
 		let filename = arr[arr.length - 1]
-		console.log(file, filename)
+		
 		uni.uploadFile({
 			url: ENV.app.host + URL.file.upload,
 			filePath: file,

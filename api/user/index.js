@@ -23,3 +23,22 @@ exports.Register = (openid, name, avatar, sex, success, fail) => {
 		})
 	});
 }
+
+exports.MyInfo = (success, fail) => {
+	const uid = uni.getStorageSync('uid')
+	const url = ENV.app.host + URL.user.myinfo;
+	REQ.request(url, {
+		uid
+	}).then(function(info) {
+		if (success) {
+			success(info)
+		}
+	}).catch(function(error) {
+		console.log(error)
+		uni.hideLoading();
+		uni.showToast({
+			title: error,
+			icon: 'none'
+		})
+	});
+}

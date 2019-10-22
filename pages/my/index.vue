@@ -11,7 +11,7 @@
 					<text class="text-grey">提交的店铺</text>
 				</view>
 				<view class="action">
-					<text class="text-grey text-sm">0/100</text>
+					<text class="text-grey text-sm">{{shopInfo.pass_count}}/{{shopInfo.wait_count+shopInfo.pass_count}}</text>
 				</view>
 			</view>
 		</view>
@@ -20,19 +20,32 @@
 
 <script>
 	import { Code2Session } from "@/api/qq/index.js"
-	import { Register } from "@/api/user/index.js"
+	import { Register,MyInfo } from "@/api/user/index.js"
 	export default {
 		data() {
 			return {
 				isLogin:false,
 				isLoading:false,
+				
+				shopInfo:{
+					pass_count:0,
+					wait_count:0
+				}
 			};
 		},
 		created(){
 			const uid=uni.getStorageSync('uid')
 			if(uid && uid>0) this.isLogin=true;
+			
+			this.loadData();
+			
 		},
 		methods: {
+			loadData(){
+				MyInfo(info=>{
+					this.shopInfo=info.shop
+				})
+			},
 			handleUserInfo(e){
 				const info=JSON.parse(e.detail.data)
 				this.login(info)
