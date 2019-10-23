@@ -3,6 +3,9 @@ import App from './App'
 
 Vue.config.productionTip = false
 
+import store from './store'
+Vue.prototype.$store=store;
+
 App.mpType = 'app'
 
 import cuCustom from './libs/colorui/components/cu-custom.vue'

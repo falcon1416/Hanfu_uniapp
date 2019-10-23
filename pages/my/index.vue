@@ -15,16 +15,27 @@
 					<text class="text-grey text-sm">{{shopInfo.pass_count}}/{{shopInfo.wait_count+shopInfo.pass_count}}</text>
 				</view>
 			</view>
+			<view v-if="isAdmin" @click="toShop" class="cu-item arrow">
+				<view class="content">
+					<text class="cuIcon-warn text-green"></text>
+					<text class="text-grey">审核店铺</text>
+				</view>
+				<view class="action">
+					<text class="text-grey text-sm">{{shopInfo.all_wait_count}}</text>
+				</view>
+			</view>
 		</view>
+		
 	</scroll-view>
 </template>
 
 <script>
 	import {
 		Code2Session
-	} from "@/api/qq/index.js"
+	} from "@/api/app/index.js"
 	import {
 		Register,
+		Login,
 		MyInfo
 	} from "@/api/user/index.js"
 	export default {
@@ -32,6 +43,8 @@
 			return {
 				isLogin: false,
 				isLoading: false,
+				
+				isAdmin:false,
 
 				shopInfo: {
 					pass_count: 0,
@@ -40,14 +53,17 @@
 			};
 		},
 		created() {
-			const uid = uni.getStorageSync('uid')
-			console.log("uid:",uid)
-			if (uid && uid > 0) {
-				this.isLogin = true;
-				this.loadData();
-			}
+			this.initView();
 		},
 		methods: {
+			initView(){
+				const uid = this.$store.getters.uid
+				if (uid > 0) {
+					this.isLogin = true;
+					this.loadData();
+				}
+				this.isAdmin=this.$store.getters.isAdmin
+			},
 			loadData() {
 				MyInfo(info => {
 					this.shopInfo = info.shop
@@ -70,15 +86,21 @@
 						Code2Session(res.code, info => {
 							const openid = info.openid;
 							Register(openid, name, avatar, sex, info => {
-								uni.setStorageSync('openid', openid);
-								uni.setStorageSync('name', name);
-								uni.setStorageSync('avatar', avatar);
-								uni.setStorageSync('sex', sex);
-								uni.setStorageSync('token', info.token);
-								uni.setStorageSync('uid', info.uid);
-
-								this.isLoading = false;
-								this.isLogin = true;
+								//重新登录
+								Login(openid,info=>{
+									const uid=info.id;
+									this.$store.dispatch('user/setUID', uid)
+									if(uid>0){
+										this.$store.dispatch('user/setName', info.name)
+										this.$store.dispatch('user/setAvatar', info.avatar)
+										this.$store.dispatch('user/setSex', info.sex)
+										this.$store.dispatch('user/setAdmin', info.is_admin)
+									}
+									
+									this.isLoading = false;
+									this.initView();
+								});
+								
 
 							})
 						})

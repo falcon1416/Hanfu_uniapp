@@ -1,9 +1,10 @@
 module.exports = {
-	qq:{
-		code2Session:'/qq/code2Session'
+	app:{
+		code2Session:'/app/code2Session'
 	},
 	user:{
 		register:'/user/register',
+		login:'/user/login',
 		myinfo:'/user/my-info',
 	},
 	file:{
