@@ -26,7 +26,6 @@ const mutations = {
 
 const actions = {
 	setUID({ commit }, value) {
-		console.log("setUID",value)
 		commit('SET_UID', value)
 	},
 	setName({ commit }, value) {

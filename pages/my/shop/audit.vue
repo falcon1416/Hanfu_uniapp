@@ -2,7 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-white" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">提交的店铺</block>
+			<block slot="content">待审核的店铺</block>
 		</cu-custom>
 		
 		<view v-if="info.list.length==0" class="no-data">
@@ -24,13 +24,11 @@
 				</view>
 			</view>
 		</view>
-		
-		<button class="footer" type="default" @click="toAdd">添加</button>
 	</view>
 </template>
 
 <script>
-	import { My } from "@/api/shop/index.js"
+	import { QueryAudit } from "@/api/shop/index.js"
 	import {
 		EventBus
 	} from "@/common/bus.js";
@@ -55,33 +53,22 @@
 		},
 		methods: {
 			loadData(){
-				My(this.info.page,this.info.limit,info=>{
+				const uid = this.$store.getters.uid
+				QueryAudit(uid,this.info.page,this.info.limit,info=>{
 					this.info.list=this.info.list.concat(info.list)
 				})
 			},
 			handleClick(item){
 				if(item.status==0){
 					uni.navigateTo({
-						url: "/pages/my/shop/editShop?id="+item.id
+						url: "/pages/my/shop/edit?id="+item.id
 					})
 				}
-			},
-			toAdd() {
-				uni.navigateTo({
-					url: "/pages/my/shop/addShop"
-				})
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.footer {
-		position: fixed;
-		left: 0px;
-		bottom: 0px;
-		width: 100%;
-		z-index: 9999;
-	}
-	
+
 </style>

@@ -34,13 +34,15 @@
 		<view class="cu-form-group margin-top">
 			<textarea v-model="info.intro" maxlength="-1" placeholder="店铺介绍"></textarea>
 		</view>
-	
-		<button type="default" class="margin-top" @click="formSubmit">保存</button>
+		
+		<button v-if="isAdmin==1 && isAdd==false" type="default" class="margin-top" @click="formSubmitAudit">审核</button>
+		<button v-else type="default" class="margin-top" @click="formSubmit">保存</button>
+		
 	</form>
 </template>
 
 <script>
-	import { Add,Edit } from "@/api/shop/index.js"
+	import { Add,Edit,Audit } from "@/api/shop/index.js"
 	import {
 		EventBus
 	} from "@/common/bus.js";
@@ -48,6 +50,7 @@
 	export default {
 		data() {
 			return {
+				isAdmin:false,
 				isAdd:true,
 				
 				info:{
@@ -59,8 +62,6 @@
 					intro:'',
 					uid:0,
 				},
-				
-				
 				
 				typeList: [{
 						value: "1",
@@ -95,6 +96,9 @@
 				]
 			};
 		},
+		created() {
+			this.isAdmin=this.$store.getters.isAdmin
+		},
 		methods: {
 			SetInfo(info){
 				let types=info.type.split(",")
@@ -105,7 +109,8 @@
 					tag:info.tag,
 					type:types,
 					share:info.share,
-					intro:info.intro
+					intro:info.intro,
+					uid:info.create_uid
 				}
 				
 				for (var i = 0; i < this.typeList.length; ++i) {
@@ -150,6 +155,38 @@
 					}
 				});
 			},
+			//审核
+			formSubmitAudit(){
+				const data={}
+				for (let key in this.info) {
+					data[key]=this.info[key]
+					if (this.info[key].length == 0) {
+						uni.showToast({
+							icon: 'none',
+							title: '请填写所有信息',
+							duration: 2000
+						});
+						return;
+					}
+				}
+				
+				data.type=data.type.join(",")
+				console.log(data)
+				this.auditData(data);
+			},
+			auditData(data){
+				uni.showLoading();
+				Audit(data,info=>{
+					
+					uni.hideLoading();
+					uni.showToast({
+						icon:'none',
+						title:info.message
+					})
+					uni.navigateBack();
+					EventBus.$emit("reloadData-myShop-list");
+				})
+			},
 			formSubmit() {
 				console.log(this.info)
 				const data={}
@@ -165,7 +202,8 @@
 					}
 				}
 				
-				data.uid=uni.getStorageSync('uid');
+				console.log("this.$store.getters.uid:",this.$store.getters.uid)
+				data.uid=this.$store.getters.uid;
 				data.type=data.type.join(",")
 				
 				if(this.isAdd==true){

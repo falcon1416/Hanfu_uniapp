@@ -15,7 +15,7 @@
 					<text class="text-grey text-sm">{{shopInfo.pass_count}}/{{shopInfo.wait_count+shopInfo.pass_count}}</text>
 				</view>
 			</view>
-			<view v-if="isAdmin" @click="toShop" class="cu-item arrow">
+			<view v-if="isAdmin" @click="toAuditShop" class="cu-item arrow">
 				<view class="content">
 					<text class="cuIcon-warn text-green"></text>
 					<text class="text-grey">审核店铺</text>
@@ -65,7 +65,8 @@
 				this.isAdmin=this.$store.getters.isAdmin
 			},
 			loadData() {
-				MyInfo(info => {
+				const uid = this.$store.getters.uid
+				MyInfo(uid,info => {
 					this.shopInfo = info.shop
 				})
 			},
@@ -113,7 +114,12 @@
 			},
 			toShop() {
 				uni.navigateTo({
-					url: "/pages/my/shop/index"
+					url: "/pages/my/shop/list"
+				})
+			},
+			toAuditShop() {
+				uni.navigateTo({
+					url: "/pages/my/shop/audit"
 				})
 			},
 		}

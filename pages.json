@@ -28,7 +28,7 @@
 			}
 		},
 		{
-			"path": "pages/my/shop/index",
+			"path": "pages/my/shop/list",
 			"style": {
 				"app-plus": {
 					// 将回弹属性关掉
@@ -37,7 +37,7 @@
 			}
 		},
 		{
-			"path": "pages/my/shop/addShop",
+			"path": "pages/my/shop/add",
 			"style": {
 				"app-plus": {
 					// 将回弹属性关掉
@@ -46,7 +46,16 @@
 			}
 		},
 		{
-			"path": "pages/my/shop/editShop",
+			"path": "pages/my/shop/edit",
+			"style": {
+				"app-plus": {
+					// 将回弹属性关掉
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/my/shop/audit",
 			"style": {
 				"app-plus": {
 					// 将回弹属性关掉

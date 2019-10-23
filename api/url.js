@@ -13,7 +13,9 @@ module.exports = {
 	shop:{
 		add:'/shop/add',
 		edit:'/shop/edit',
+		audit:'/shop/audit',
 		my:'/shop/query-my',
+		queryaudit:'/shop/query-audit',
 		detail:'/shop/detail',
 	}
 }

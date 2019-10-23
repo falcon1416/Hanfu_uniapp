@@ -42,8 +42,7 @@ exports.Login = (openid, success, fail) => {
 	});
 }
 
-exports.MyInfo = (success, fail) => {
-	const uid = uni.getStorageSync('uid')
+exports.MyInfo = (uid,success, fail) => {
 	const url = ENV.app.host + URL.user.myinfo;
 	REQ.request(url, {
 		uid

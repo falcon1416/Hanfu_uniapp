@@ -22,9 +22,11 @@
 		},
 		methods: {
 			autoLogin() {
+				console.log("自动登录")
 				//获取openid
 				uni.login({
 					success: res => {
+						console.log(res)
 						Code2Session(res.code, info => {
 							const openid = info.openid;
 							this.$store.dispatch('app/setOpenID', openid)
@@ -46,6 +48,9 @@
 							})
 						});
 					},
+					fail:err=>{
+						console.log(err)
+					}
 				})
 			}
 		}
