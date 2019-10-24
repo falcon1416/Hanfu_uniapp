@@ -10,11 +10,7 @@ const ENV = {
   'prod': prodConfig, //生产环境
 }
 
-let env=""
-if(process.env.NODE_ENV === 'development'){
-	env = ENV.dev;
-}else{
-	env = ENV.prod;
-}
+let env=ENV.prod;
+
 
 module.exports = env;
