@@ -55,6 +55,15 @@
 			}
 		},
 		{
+			"path": "pages/my/shop/auditList",
+			"style": {
+				"app-plus": {
+					// 将回弹属性关掉
+					"bounce": "none"
+				}
+			}
+		},
+		{
 			"path": "pages/my/shop/audit",
 			"style": {
 				"app-plus": {

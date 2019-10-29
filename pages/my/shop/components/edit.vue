@@ -1,5 +1,5 @@
 <template>
-	<form report-submit>
+	<form report-submit @submit="formSubmit">
 		<view class="cu-form-group margin-top">
 			<view class="title">logo</view>
 			<view class="solids" @tap="handleChooseImage">
@@ -35,8 +35,7 @@
 			<textarea v-model="info.intro" maxlength="-1" placeholder="店铺介绍"></textarea>
 		</view>
 		
-		<button v-if="isAdmin==1 && isAdd==false" type="default" class="margin-top" @click="formSubmitAudit">审核</button>
-		<button v-else type="default" class="margin-top" @click="formSubmit">保存</button>
+		<button type="default" class="margin-top" form-type="submit">保存</button>
 		
 	</form>
 </template>
@@ -50,7 +49,6 @@
 	export default {
 		data() {
 			return {
-				isAdmin:false,
 				isAdd:true,
 				
 				info:{
@@ -97,7 +95,7 @@
 			};
 		},
 		created() {
-			this.isAdmin=this.$store.getters.isAdmin
+			
 		},
 		methods: {
 			SetInfo(info){
@@ -122,7 +120,6 @@
 						}
 					}
 				}
-				console.log(this.info)
 				this.isAdd=false;
 			},
 			onCheckChange(e) {
@@ -155,8 +152,10 @@
 					}
 				});
 			},
-			//审核
-			formSubmitAudit(){
+			formSubmit(e) {
+				let form_id=e.detail.formId;
+				console.log(form_id,e)
+				// console.log(this.info)
 				const data={}
 				for (let key in this.info) {
 					data[key]=this.info[key]
@@ -170,41 +169,9 @@
 					}
 				}
 				
-				data.type=data.type.join(",")
-				console.log(data)
-				this.auditData(data);
-			},
-			auditData(data){
-				uni.showLoading();
-				Audit(data,info=>{
-					
-					uni.hideLoading();
-					uni.showToast({
-						icon:'none',
-						title:info.message
-					})
-					uni.navigateBack();
-					EventBus.$emit("reloadData-myShop-list");
-				})
-			},
-			formSubmit() {
-				console.log(this.info)
-				const data={}
-				for (let key in this.info) {
-					data[key]=this.info[key]
-					if (this.info[key].length == 0) {
-						uni.showToast({
-							icon: 'none',
-							title: '请填写所有信息',
-							duration: 2000
-						});
-						return;
-					}
-				}
-				
-				console.log("this.$store.getters.uid:",this.$store.getters.uid)
 				data.uid=this.$store.getters.uid;
 				data.type=data.type.join(",")
+				data.formid=form_id;
 				
 				if(this.isAdd==true){
 					this.addData(data);

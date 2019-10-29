@@ -119,7 +119,7 @@
 			},
 			toAuditShop() {
 				uni.navigateTo({
-					url: "/pages/my/shop/audit"
+					url: "/pages/my/shop/auditList"
 				})
 			},
 		}
