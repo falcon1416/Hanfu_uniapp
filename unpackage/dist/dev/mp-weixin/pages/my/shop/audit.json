@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "v-audit": "/pages/my/shop/components/audit"
+  }
+}

@@ -1,0 +1,1 @@
+<view><cu-custom vue-id="1" bgColor="bg-white" isBack="{{true}}" bind:__l="__l" vue-slots="{{['backText','content']}}"><view slot="backText">返回</view><view slot="content">编辑店铺</view></cu-custom><v-edit class="vue-ref" vue-id="2" data-ref="edit" bind:__l="__l"></v-edit></view>

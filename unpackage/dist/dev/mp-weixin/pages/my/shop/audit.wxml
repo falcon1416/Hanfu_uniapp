@@ -1,0 +1,1 @@
+<view><cu-custom vue-id="1" bgColor="bg-white" isBack="{{true}}" bind:__l="__l" vue-slots="{{['backText','content']}}"><view slot="backText">返回</view><view slot="content">审核店铺</view></cu-custom><v-audit class="vue-ref" vue-id="2" data-ref="audit" bind:__l="__l"></v-audit></view>

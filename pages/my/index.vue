@@ -1,8 +1,15 @@
 <template>
 	<scroll-view scroll-y class="page">
-		<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571636052810&di=a72e718e89843b26bd55500779466e2f&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fad547b7090e0ba0ff5729b5809d40742186e033ff624-sC1wHP_fw658"
-		 mode="widthFix" class="response"></image>
-
+		
+	<swiper class="screen-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="true" :circular="true"
+		 :autoplay="true" interval="5000" duration="500">
+			<swiper-item v-for="(item,index) in swiperList" :key="index">
+				<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
+				<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
+			</swiper-item>
+		</swiper>
+        
+        
 		<button v-if="isLogin==false" :loading="isLoading" class="margin-top bg-red" open-type="getUserInfo" @getuserinfo="handleUserInfo">获取用户信息</button>
 
 		<view v-else class="cu-list menu margin-top">
@@ -49,7 +56,16 @@
 				shopInfo: {
 					pass_count: 0,
 					wait_count: 0
-				}
+				},
+                swiperList: [{
+                	id: 0,
+                	type: 'image',
+                	url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571636052810&di=a72e718e89843b26bd55500779466e2f&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fad547b7090e0ba0ff5729b5809d40742186e033ff624-sC1wHP_fw658'
+                }, {
+                	id: 1,
+                	type: 'image',
+                	url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571636052810&di=a72e718e89843b26bd55500779466e2f&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fad547b7090e0ba0ff5729b5809d40742186e033ff624-sC1wHP_fw658',
+                }],
 			};
 		},
 		created() {
@@ -127,5 +143,5 @@
 </script>
 
 <style lang="scss" scoped>
-
+ .cuIcon-warn { font-size:40rpx;margin-right:20rpx;}
 </style>
