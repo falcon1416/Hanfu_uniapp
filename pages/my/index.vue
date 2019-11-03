@@ -60,7 +60,7 @@
                 swiperList: [{
                 	id: 0,
                 	type: 'image',
-                	url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571636052810&di=a72e718e89843b26bd55500779466e2f&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fad547b7090e0ba0ff5729b5809d40742186e033ff624-sC1wHP_fw658'
+                	url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572835030740&di=95e09b6c7cc86942c98cbce96dfc2f4a&imgtype=0&src=http%3A%2F%2Fwww.hanfudian.com%2FStorage%2Fgallery%2F201505%2F20150501103344_0781.jpg'
                 }, {
                 	id: 1,
                 	type: 'image',
