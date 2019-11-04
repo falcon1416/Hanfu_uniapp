@@ -1,6 +1,0 @@
-
-.solids { width:60rpx;height:60rpx;}
-.solids text {  font-size:60rpx;}
-.cu-form-group .title  {width:200rpx;}
-checkbox-group label { float:left; margin:10rpx;}
-
