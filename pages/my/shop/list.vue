@@ -4,66 +4,110 @@
 			<block slot="backText">返回</block>
 			<block slot="content">提交的店铺</block>
 		</cu-custom>
-		
-		<view v-if="info.list.length==0" class="no-data">
-			暂无数据
-		</view>
-		<view v-else class="cu-list menu-avatar">
-			<view @click="handleClick(item)" v-for="(item,index) in info.list" :key="index"  class="cu-item">
-				<view class="cu-avatar round lg" :style="'background-image:url('+item.logo+');'"></view>
-				<view class="content">
-					<view class="text-grey">{{item.name}}</view>
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">
-							<text class="cuIcon-infofill text-red  margin-right-xs"></text>
-							{{item.intro}}
-						</view> </view>
-				</view>
-				<view class="action">
-					<view class="text-grey text-xs">{{item.status_name}}}</view>
+
+		<mescroll-uni :fixed="false" :down="downOption" @down="downCallback" :up="upOption" @up="upCallback" @emptyclick="emptyClick"
+		 @init="mescrollInit">
+			<view class="cu-list menu-avatar">
+				<view @click="handleClick(item)" v-for="(item,index) in info.list" :key="index" class="cu-item">
+					<view class="cu-avatar round lg" :style="'background-image:url('+item.logo+');'"></view>
+					<view class="content">
+						<view class="text-grey">{{item.name}}</view>
+						<view class="text-gray text-sm flex">
+							<view class="text-cut">
+								<text class="cuIcon-infofill text-red  margin-right-xs"></text>
+								{{item.intro}}
+							</view>
+						</view>
+					</view>
+					<view class="action">
+						<view class="text-grey text-xs">{{item.status_name}}}</view>
+					</view>
 				</view>
 			</view>
-		</view>
-		
+		</mescroll-uni>
 		<button class="footer" type="default" @click="toAdd">添加</button>
 	</view>
 </template>
 
 <script>
-	import { My } from "@/api/shop/index.js"
+	import {
+		My
+	} from "@/api/shop/index.js"
+	import MescrollUni from "@/libs/mescroll-uni/mescroll-uni.vue";
+
 	import {
 		EventBus
 	} from "@/common/bus.js";
 	export default {
 		data() {
 			return {
-				info:{
-					page:1,
-					limit:10,
-					list:[],
+				mescroll:null,
+				downOption: {
+					auto: false, // 不自动加载
+				},
+				upOption: {
+					auto: false, // 不自动加载
+					page: {
+						num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
+						// 	size: 10 // 每页数据的数量
+					},
+					noMoreSize: 4, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
+					empty: {
+						tip: '~ 暂无数据 ~', // 提示
+					}
+				},
+
+				info: {
+					page: 1,
+					limit: 10,
+					list: [],
 				}
 			};
 		},
+		components: {
+			MescrollUni
+		},
 		created() {
 			EventBus.$on("reloadData-myShop-list", () => {
-				this.info.page=1;
-				this.info.list=[];
+				this.info.page = 1;
+				this.info.list = [];
 				this.loadData();
 			});
 			
-			this.loadData();
+			this.$nextTick(()=>{
+				this.loadData();
+			})
+			
 		},
 		methods: {
 			loadData(){
+				this.mescroll.triggerDownScroll();
+			},
+			mescrollInit(mescroll) {
+				this.mescroll = mescroll;
+			},
+			/*下拉刷新的回调 */
+			downCallback(mescroll) {
+				mescroll.resetUpScroll()
+			},
+			/*上拉加载的回调: mescroll携带page的参数, 其中num:当前页 从1开始, size:每页数据条数,默认10 */
+			upCallback(mescroll) {
+				let page=this.mescroll.num?this.mescroll.num:1				
+				//联网加载数据
 				const uid = this.$store.getters.uid
-				My(uid,this.info.page,this.info.limit,info=>{
-					this.info.list=this.info.list.concat(info.list)
+				My(uid, page, this.info.limit, (info)=>{
+					if(mescroll.num == 1) this.info.list = info.list;
+					else this.info.list = this.info.list.concat(info.list)
+					mescroll.endBySize(this.info.list.length, info.total);
+				}, () => {
+					//联网失败的回调,隐藏下拉刷新的状态
+					mescroll.endErr();
 				})
 			},
-			handleClick(item){
-				if(item.status==0){
+			handleClick(item) {
+				if (item.status == 0) {
 					uni.navigateTo({
-						url: "/pages/my/shop/edit?id="+item.id
+						url: "/pages/my/shop/edit?id=" + item.id
 					})
 				}
 			},
@@ -84,5 +128,4 @@
 		width: 100%;
 		z-index: 9999;
 	}
-	
 </style>
