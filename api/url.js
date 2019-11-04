@@ -17,5 +17,9 @@ module.exports = {
 		my:'/shop/query-my',
 		queryaudit:'/shop/query-audit',
 		detail:'/shop/detail',
+	},
+	activity:{
+		query:'/activity/query',
+		create:'/activity/create',
 	}
 }

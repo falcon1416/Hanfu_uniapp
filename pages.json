@@ -19,6 +19,24 @@
 			}
 		},
 		{
+			"path": "pages/activity/index",
+			"style": {
+				"app-plus": {
+					// 将回弹属性关掉
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/activity/add",
+			"style": {
+				"app-plus": {
+					// 将回弹属性关掉
+					"bounce": "none"
+				}
+			}
+		},
+		{
 			"path": "pages/my/index",
 			"style": {
 				"app-plus": {
@@ -83,6 +101,11 @@
 			"iconPath": "static/image/tabbar/icon_home.png",
 			"selectedIconPath": "static/image/tabbar/icon_home_selected.png",
 			"text": "主页"
+		}, {
+			"pagePath": "pages/activity/index",
+			"iconPath": "static/image/tabbar/icon_member.png",
+			"selectedIconPath": "static/image/tabbar/icon_member_selected.png",
+			"text": "活动"
 		}, {
 			"pagePath": "pages/my/index",
 			"iconPath": "static/image/tabbar/icon_member.png",
