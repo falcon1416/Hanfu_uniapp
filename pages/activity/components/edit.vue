@@ -142,7 +142,7 @@
 						title:'修改成功'
 					})
 					uni.navigateBack();
-					EventBus.$emit("reloadData-myShop-list");
+					EventBus.$emit("reloadData-activity-list");
 				})
 			}
 		},
