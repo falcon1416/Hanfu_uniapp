@@ -6,20 +6,19 @@
 
 		<mescroll-uni :fixed="false" :down="downOption" @down="downCallback" :up="upOption" @up="upCallback" @emptyclick="emptyClick"
 		 @init="mescrollInit">
-			<view class="cu-list menu-avatar">
+			<view class="cu-list menu">
 				<view @click="handleClick(item)" v-for="(item,index) in info.list" :key="index" class="cu-item">
-					<view class="cu-avatar round lg" :style="'background-image:url('+item.logo+');'"></view>
 					<view class="content">
-						<view class="text-grey">{{item.name}}</view>
+						<view class="text-grey">{{item.title}}</view>
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
 								<text class="cuIcon-infofill text-red  margin-right-xs"></text>
-								{{item.intro}}
+								{{item.address}}
 							</view>
 						</view>
 					</view>
 					<view class="action">
-						<view class="text-grey text-xs">{{item.status_name}}}</view>
+						<view class="text-grey text-xs">{{item.start_time}}</view>
 					</view>
 				</view>
 			</view>

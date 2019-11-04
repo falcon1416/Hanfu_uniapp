@@ -20,7 +20,7 @@
 						</view>
 					</view>
 					<view class="action">
-						<view class="text-grey text-xs">{{item.status_name}}}</view>
+						<view class="text-grey text-xs">{{item.status_name}}</view>
 					</view>
 				</view>
 			</view>

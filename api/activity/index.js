@@ -23,3 +23,22 @@ exports.Query = (uid,page, limit, success, fail) => {
 		}
 	});
 }
+
+exports.Add = (data, success, fail) => {
+	const url = ENV.app.host + URL.activity.create;
+	REQ.request(url, data).then(function(info) {
+		console.log(info)
+		if (success) {
+			success()
+		}
+	}).catch(function(error) {
+		console.log(error)
+		uni.hideLoading();
+		if (error) {
+			uni.showToast({
+				title: error,
+				icon: 'none'
+			})
+		}
+	});
+}
