@@ -7,7 +7,7 @@
 		
 		<view class="cu-form-group margin-top">
 			<view class="title">活动日期</view>
-			<picker mode="date" :value="info.startime[0]" start="2015-09-01" end="2030-09-01" @change="onStartDateChange">
+			<picker mode="date" :value="info.startime[0]" :start="today" end="2030-09-01" @change="onStartDateChange">
 				<view class="picker">
 					{{info.startime[0]}}
 				</view>
@@ -46,7 +46,7 @@
 		data() {
 			return {
 				isAdd:true,
-				
+				today:'',
 				info:{
 					title: '',
 					desc:'',
@@ -57,31 +57,26 @@
 			};
 		},
 		created() {
-			
+			const day = new Date();
+			let month=day.getMonth()+1;
+			month=month<10?'0'+month:month
+			let d=day.getDate()
+			d=d<10?'0'+d:d
+			this.today= day.getFullYear()+"-" + month + "-" + d;
+			this.info.startime[0]=this.today;
 		},
 		methods: {
 			SetInfo(info){
-				let types=info.type.split(",")
+				let startimes=info.start_time.split(" ")
 				this.info={
 					id:info.id,
-					logo: info.logo,
-					name:info.name,
-					tag:info.tag,
-					type:types,
-					share:info.share,
-					intro:info.intro,
+					title: info.title,
+					desc:info.desc,
+					address:info.address,
+					startime:startimes,
 					uid:info.create_uid
 				}
 				
-				for (var i = 0; i < this.typeList.length; ++i) {
-					this.typeList[i].isSelected = false;
-					for (var j = 0; j < types.length; ++j) {
-						if (this.typeList[i].value == types[j]) {
-							this.typeList[i].isSelected = true;
-							break
-						}
-					}
-				}
 				this.isAdd=false;
 			},
 			onStartDateChange(e) {
@@ -111,6 +106,14 @@
 					}
 				}
 				
+				if(new Date(data.startime[0])<new Date(this.today)){
+					uni.showToast({
+						icon: 'none',
+						title: '不能创建以前的活动',
+						duration: 2000
+					});
+					return;
+				}
 				data.startime=data.startime[0]+" "+data.startime[1]
 				data.uid=this.$store.getters.uid;
 				data.formid=form_id;

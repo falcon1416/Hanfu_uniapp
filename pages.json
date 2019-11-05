@@ -28,7 +28,25 @@
 			}
 		},
 		{
+			"path": "pages/activity/detail",
+			"style": {
+				"app-plus": {
+					// 将回弹属性关掉
+					"bounce": "none"
+				}
+			}
+		},
+		{
 			"path": "pages/activity/add",
+			"style": {
+				"app-plus": {
+					// 将回弹属性关掉
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/activity/edit",
 			"style": {
 				"app-plus": {
 					// 将回弹属性关掉

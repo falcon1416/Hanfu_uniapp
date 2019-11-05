@@ -103,11 +103,9 @@
 				})
 			},
 			handleClick(item) {
-				if (item.status == 0) {
-					uni.navigateTo({
-						url: "/pages/my/shop/edit?id=" + item.id
-					})
-				}
+				uni.navigateTo({
+					url: "/pages/activity/detail?id=" + item.id
+				})
 			},
 			toAdd() {
 				uni.navigateTo({
