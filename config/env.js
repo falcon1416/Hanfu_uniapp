@@ -10,7 +10,7 @@ const ENV = {
   'prod': prodConfig, //生产环境
 }
 
-let env=ENV.dev;
+let env=ENV.prod;
 
 
 module.exports = env;
