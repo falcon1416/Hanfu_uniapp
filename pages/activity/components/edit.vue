@@ -37,6 +37,7 @@
 </template>
 
 <script>
+	import amap from '@/libs/amap/amap-wx.js';
 	import { Add,Edit } from "@/api/activity/index.js"
 	import {
 		EventBus

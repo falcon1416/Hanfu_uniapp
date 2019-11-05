@@ -64,6 +64,15 @@
 			}
 		},
 		{
+			"path": "pages/my/login",
+			"style": {
+				"app-plus": {
+					// 将回弹属性关掉
+					"bounce": "none"
+				}
+			}
+		},
+		{
 			"path": "pages/my/shop/list",
 			"style": {
 				"app-plus": {

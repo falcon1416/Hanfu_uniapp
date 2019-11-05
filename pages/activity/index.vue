@@ -108,6 +108,14 @@
 				})
 			},
 			toAdd() {
+				const uid = this.$store.getters.uid
+				if(!uid){
+					uni.navigateTo({
+						url: "/pages/my/login"
+					})
+					return;
+				}
+				
 				uni.navigateTo({
 					url: "/pages/activity/add"
 				})

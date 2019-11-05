@@ -120,6 +120,14 @@
 				})
 			},
 			toEnroll() {
+				const uid = this.$store.getters.uid
+				if(!uid){
+					uni.navigateTo({
+						url: "/pages/my/login"
+					})
+					return;
+				}
+				
 				uni.showLoading();
 				if(this.isJoin==false){
 					Join(this.id, this.myuid, info => {
