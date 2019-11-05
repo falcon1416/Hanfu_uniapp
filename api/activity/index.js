@@ -103,3 +103,25 @@ exports.Join = (id, uid, success, fail) => {
 		}
 	});
 }
+
+exports.Leave = (id, uid, success, fail) => {
+	const url = ENV.app.host + URL.activity.leave;
+	REQ.request(url, {
+		id,
+		uid
+	}).then(function(info) {
+		console.log(info)
+		if (success) {
+			success(info)
+		}
+	}).catch(function(error) {
+		console.log(error)
+		uni.hideLoading();
+		if (error) {
+			uni.showToast({
+				title: error,
+				icon: 'none'
+			})
+		}
+	});
+}

@@ -22,6 +22,7 @@ module.exports = {
 		query:'/activity/query',
 		create:'/activity/create',
 		join:'/activity/join',
+		leave:'/activity/leave',
 		edit:'/activity/edit',
 		detail:'/activity/detail',
 	}
