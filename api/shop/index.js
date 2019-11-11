@@ -3,6 +3,11 @@ const URL = require("../url.js")
 const REQ = require("../request.js")
 
 exports.Add = (data, success, fail) => {
+	let plantform="qq";
+	// #ifdef MP-WEIXIN
+	 plantform="wx"
+	// #endif
+	data['plantform']=plantform;
 	const url = ENV.app.host + URL.shop.add;
 	REQ.request(url, data).then(function(info) {
 		console.log(info)
