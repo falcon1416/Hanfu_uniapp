@@ -4,9 +4,14 @@ const REQ = require("../request.js")
 
 //查询session
 exports.Code2Session = (code, success, fail) => {
+	let version="qq";
+	// #ifdef MP-WEIXIN
+	 version="wx"
+	// #endif
 	const url = ENV.app.host + URL.app.code2Session;
 	REQ.request(url, {
-		code
+		code,
+		version
 	}).then(function(info) {
 		console.log(info)
 
